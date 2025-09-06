@@ -1,0 +1,37 @@
+# Core
+python-dotenv
+pandas
+numpy
+requests
+pydantic
+
+# AI & Voice
+openai
+whisper
+transformers
+speechrecognition
+
+# ML & Backtesting
+scikit-learn
+talib-binary
+backtrader
+
+# Web & Dashboard
+flask
+flask-socketio
+flask-cors
+plotly
+
+# Async & Utilities
+aiohttp
+websockets
+
+# Exchange APIs
+ccxt
+
+# Testing
+testfixtures
+pytest
+
+# Optional: For Hyperliquid or other APIs, add as needed
+# hyperliquid-python-sdk 

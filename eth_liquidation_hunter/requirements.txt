@@ -1,0 +1,31 @@
+# Core
+python-dotenv
+pandas
+numpy
+requests
+pydantic
+
+# On-chain & Web3
+web3
+etherscan-python
+
+# ML & Backtesting
+scikit-learn
+talib-binary
+backtrader
+
+# Web & Dashboard
+flask
+flask-socketio
+flask-cors
+plotly
+
+# Async & Utilities
+aiohttp
+websockets
+
+# Exchange APIs
+ccxt
+
+# Testing
+pytest 

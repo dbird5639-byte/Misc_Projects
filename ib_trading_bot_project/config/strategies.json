@@ -1,0 +1,97 @@
+{
+  "strategies": {
+    "momentum": {
+      "name": "Momentum Strategy",
+      "description": "Follows price momentum with trend confirmation",
+      "enabled": true,
+      "parameters": {
+        "lookback_period": 20,
+        "momentum_threshold": 0.02,
+        "volume_threshold": 1.5,
+        "stop_loss": 0.05,
+        "take_profit": 0.10
+      },
+      "instruments": ["stocks"],
+      "risk_level": "medium"
+    },
+    "mean_reversion": {
+      "name": "Mean Reversion Strategy",
+      "description": "Trades against extreme price movements",
+      "enabled": true,
+      "parameters": {
+        "lookback_period": 50,
+        "std_dev_threshold": 2.0,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70,
+        "stop_loss": 0.03,
+        "take_profit": 0.08
+      },
+      "instruments": ["stocks"],
+      "risk_level": "low"
+    },
+    "breakout": {
+      "name": "Breakout Strategy",
+      "description": "Trades breakouts from consolidation patterns",
+      "enabled": false,
+      "parameters": {
+        "consolidation_period": 20,
+        "breakout_threshold": 0.03,
+        "volume_confirmation": true,
+        "stop_loss": 0.04,
+        "take_profit": 0.12
+      },
+      "instruments": ["stocks"],
+      "risk_level": "high"
+    },
+    "pairs_trading": {
+      "name": "Pairs Trading Strategy",
+      "description": "Statistical arbitrage between correlated stocks",
+      "enabled": false,
+      "parameters": {
+        "correlation_threshold": 0.8,
+        "z_score_threshold": 2.0,
+        "lookback_period": 100,
+        "stop_loss": 0.02,
+        "take_profit": 0.06
+      },
+      "instruments": ["stocks"],
+      "risk_level": "medium"
+    }
+  },
+  "risk_management": {
+    "position_sizing": {
+      "method": "kelly",
+      "max_position_size": 10000,
+      "max_portfolio_exposure": 0.2
+    },
+    "stop_loss": {
+      "enabled": true,
+      "percentage": 0.05,
+      "trailing": true
+    },
+    "take_profit": {
+      "enabled": true,
+      "percentage": 0.10
+    },
+    "portfolio_limits": {
+      "max_positions": 10,
+      "max_drawdown": 0.15,
+      "sector_limits": {
+        "technology": 0.3,
+        "healthcare": 0.2,
+        "financial": 0.2,
+        "consumer": 0.15,
+        "energy": 0.1,
+        "other": 0.05
+      }
+    }
+  },
+  "market_data": {
+    "subscriptions": [
+      "AAPL", "GOOGL", "MSFT", "TSLA", "AMZN",
+      "NVDA", "META", "NFLX", "ADBE", "CRM"
+    ],
+    "update_interval": 1,
+    "historical_days": 100
+  }
+} 
