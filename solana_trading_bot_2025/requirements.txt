@@ -1,0 +1,62 @@
+# Core dependencies
+asyncio==3.4.3
+aiohttp==3.9.1
+websockets==12.0
+requests==2.31.0
+
+# Solana and blockchain
+solana==0.32.0
+solders==0.18.1
+anchorpy==0.18.0
+
+# Data processing and analysis
+pandas==2.1.4
+numpy==1.24.3
+scipy==1.11.4
+
+# Web scraping and browser automation
+selenium==4.15.2
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Web framework
+fastapi==0.104.1
+uvicorn==0.24.0
+jinja2==3.1.2
+
+# Database
+sqlalchemy==2.0.23
+alembic==1.12.1
+sqlite3
+
+# Notifications
+python-telegram-bot==20.7
+discord.py==2.3.2
+
+# Configuration and logging
+python-dotenv==1.0.0
+pyyaml==6.0.1
+loguru==0.7.2
+
+# Technical analysis
+ta==0.10.2
+pandas-ta==0.3.14b
+
+# API clients
+jupiter-python==0.1.0
+birdeye-python==0.1.0
+
+# Utilities
+click==8.1.7
+rich==13.7.0
+tqdm==4.66.1
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+
+# Development
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1 

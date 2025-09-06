@@ -1,0 +1,34 @@
+{
+    "sniper_bot": {
+        "enabled": true,
+        "max_position_size": 0.1,
+        "min_volume": 1000,
+        "min_liquidity": 5000,
+        "auto_trade": false,
+        "scan_interval": 5,
+        "max_tokens_per_scan": 100
+    },
+    "copy_bot": {
+        "enabled": true,
+        "follow_list": [
+            "wallet_address_1",
+            "wallet_address_2"
+        ],
+        "copy_percentage": 0.5,
+        "max_delay": 30,
+        "min_trade_size": 0.01
+    },
+    "risk_management": {
+        "max_portfolio_risk": 0.05,
+        "stop_loss_percentage": 0.1,
+        "take_profit_percentage": 0.3,
+        "max_positions": 10,
+        "max_correlation": 0.7
+    },
+    "notifications": {
+        "telegram_enabled": true,
+        "discord_enabled": true,
+        "email_enabled": false,
+        "browser_notifications": true
+    }
+} 

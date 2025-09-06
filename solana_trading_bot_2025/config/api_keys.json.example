@@ -1,0 +1,8 @@
+{
+    "solana_rpc": "https://api.mainnet-beta.solana.com",
+    "jupiter_api": "your_jupiter_api_key_here",
+    "birdeye_api": "your_birdeye_api_key_here",
+    "dexscreener_api": "your_dexscreener_api_key_here",
+    "telegram_bot_token": "your_telegram_bot_token_here",
+    "discord_webhook": "your_discord_webhook_url_here"
+} 
