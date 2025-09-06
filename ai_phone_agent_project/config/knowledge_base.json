@@ -1,0 +1,112 @@
+{
+  "knowledge_base": [
+    {
+      "id": "kb_001",
+      "category": "general",
+      "question": "What are your business hours?",
+      "answer": "Our business hours are Monday through Friday, 9 AM to 6 PM Eastern Time. We're closed on weekends and major holidays.",
+      "keywords": ["hours", "business hours", "open", "closed", "schedule"],
+      "priority": "high"
+    },
+    {
+      "id": "kb_002",
+      "category": "general",
+      "question": "How can I contact customer support?",
+      "answer": "You can reach our customer support team by calling this number, emailing support@company.com, or using our live chat on our website. We typically respond within 24 hours.",
+      "keywords": ["contact", "support", "help", "customer service", "email"],
+      "priority": "high"
+    },
+    {
+      "id": "kb_003",
+      "category": "product_info",
+      "question": "What products do you offer?",
+      "answer": "We offer a range of products including software solutions, consulting services, and training programs. Our main product is our AI-powered business platform that helps companies automate their workflows.",
+      "keywords": ["products", "offer", "software", "services", "platform"],
+      "priority": "medium"
+    },
+    {
+      "id": "kb_004",
+      "category": "pricing",
+      "question": "How much does your product cost?",
+      "answer": "Our pricing varies based on your needs. We offer a basic plan starting at $99 per month, a professional plan at $299 per month, and an enterprise plan with custom pricing. All plans include our core features and customer support.",
+      "keywords": ["cost", "price", "pricing", "monthly", "plan"],
+      "priority": "high"
+    },
+    {
+      "id": "kb_005",
+      "category": "pricing",
+      "question": "Do you offer a free trial?",
+      "answer": "Yes, we offer a 14-day free trial for all our plans. No credit card required to start your trial. You can upgrade to a paid plan at any time during or after the trial period.",
+      "keywords": ["free trial", "trial", "free", "credit card", "upgrade"],
+      "priority": "medium"
+    },
+    {
+      "id": "kb_006",
+      "category": "support",
+      "question": "I need help with my account",
+      "answer": "I'd be happy to help you with your account. Could you please provide your account number or email address? I can help you with password resets, billing questions, or technical issues.",
+      "keywords": ["account", "help", "password", "billing", "technical"],
+      "priority": "high"
+    },
+    {
+      "id": "kb_007",
+      "category": "support",
+      "question": "How do I reset my password?",
+      "answer": "To reset your password, go to our website and click on 'Forgot Password' on the login page. Enter your email address and we'll send you a link to create a new password. The link expires in 24 hours.",
+      "keywords": ["reset password", "forgot password", "login", "email"],
+      "priority": "medium"
+    },
+    {
+      "id": "kb_008",
+      "category": "policies",
+      "question": "What is your return policy?",
+      "answer": "We offer a 30-day money-back guarantee for all our products. If you're not satisfied within 30 days of purchase, contact our support team and we'll process a full refund. Software licenses and digital products are also covered by this policy.",
+      "keywords": ["return", "refund", "money back", "guarantee", "policy"],
+      "priority": "medium"
+    },
+    {
+      "id": "kb_009",
+      "category": "policies",
+      "question": "What is your privacy policy?",
+      "answer": "We take your privacy seriously. We never sell your personal information to third parties. We only collect information necessary to provide our services and improve your experience. You can read our full privacy policy on our website.",
+      "keywords": ["privacy", "personal information", "data", "third parties"],
+      "priority": "low"
+    },
+    {
+      "id": "kb_010",
+      "category": "product_info",
+      "question": "What features does your platform include?",
+      "answer": "Our platform includes AI-powered automation, real-time analytics, team collaboration tools, custom integrations, and 24/7 customer support. We also offer advanced features like machine learning models and predictive analytics for enterprise customers.",
+      "keywords": ["features", "automation", "analytics", "collaboration", "integrations"],
+      "priority": "medium"
+    },
+    {
+      "id": "kb_011",
+      "category": "support",
+      "question": "How do I cancel my subscription?",
+      "answer": "To cancel your subscription, log into your account and go to the billing section. Click on 'Cancel Subscription' and follow the prompts. You can also contact our support team and we'll help you cancel. Your service will continue until the end of your current billing period.",
+      "keywords": ["cancel", "subscription", "billing", "stop service"],
+      "priority": "high"
+    },
+    {
+      "id": "kb_012",
+      "category": "general",
+      "question": "Where is your company located?",
+      "answer": "Our company is headquartered in San Francisco, California. We have offices in New York, London, and Tokyo. We serve customers worldwide and our support team is available in multiple time zones.",
+      "keywords": ["location", "headquarters", "offices", "address"],
+      "priority": "low"
+    }
+  ],
+  "settings": {
+    "version": "1.0",
+    "last_updated": "2024-01-01",
+    "total_entries": 12,
+    "categories": [
+      "general",
+      "product_info", 
+      "pricing",
+      "support",
+      "policies"
+    ]
+  }
+} 

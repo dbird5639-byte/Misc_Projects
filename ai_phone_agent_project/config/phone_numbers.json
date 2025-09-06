@@ -1,0 +1,102 @@
+{
+  "phone_numbers": [
+    {
+      "id": "main_support",
+      "number": "+1-800-123-4567",
+      "type": "toll_free",
+      "purpose": "customer_support",
+      "active": true,
+      "greeting": "Thank you for calling our customer support line. How can I help you today?",
+      "hours": {
+        "monday": {"start": "09:00", "end": "18:00"},
+        "tuesday": {"start": "09:00", "end": "18:00"},
+        "wednesday": {"start": "09:00", "end": "18:00"},
+        "thursday": {"start": "09:00", "end": "18:00"},
+        "friday": {"start": "09:00", "end": "18:00"},
+        "saturday": {"start": "10:00", "end": "16:00"},
+        "sunday": {"start": "closed", "end": "closed"}
+      },
+      "timezone": "America/New_York",
+      "after_hours_message": "Thank you for calling. Our office is currently closed. Please leave a message and we'll return your call during business hours, or visit our website for immediate assistance."
+    },
+    {
+      "id": "sales_line",
+      "number": "+1-800-987-6543",
+      "type": "toll_free",
+      "purpose": "sales",
+      "active": true,
+      "greeting": "Thank you for calling our sales team. I'm here to help you find the perfect solution for your business needs.",
+      "hours": {
+        "monday": {"start": "08:00", "end": "20:00"},
+        "tuesday": {"start": "08:00", "end": "20:00"},
+        "wednesday": {"start": "08:00", "end": "20:00"},
+        "thursday": {"start": "08:00", "end": "20:00"},
+        "friday": {"start": "08:00", "end": "18:00"},
+        "saturday": {"start": "09:00", "end": "17:00"},
+        "sunday": {"start": "closed", "end": "closed"}
+      },
+      "timezone": "America/New_York",
+      "after_hours_message": "Thank you for your interest in our products. Our sales team is currently unavailable. Please leave your contact information and we'll reach out to you during business hours."
+    },
+    {
+      "id": "technical_support",
+      "number": "+1-888-555-1234",
+      "type": "toll_free",
+      "purpose": "technical_support",
+      "active": true,
+      "greeting": "Welcome to technical support. I can help you with installation, configuration, and troubleshooting issues.",
+      "hours": {
+        "monday": {"start": "24/7", "end": "24/7"},
+        "tuesday": {"start": "24/7", "end": "24/7"},
+        "wednesday": {"start": "24/7", "end": "24/7"},
+        "thursday": {"start": "24/7", "end": "24/7"},
+        "friday": {"start": "24/7", "end": "24/7"},
+        "saturday": {"start": "24/7", "end": "24/7"},
+        "sunday": {"start": "24/7", "end": "24/7"}
+      },
+      "timezone": "America/New_York",
+      "after_hours_message": "Technical support is available 24/7. How can I assist you today?"
+    }
+  ],
+  "routing_rules": [
+    {
+      "id": "rule_001",
+      "name": "Support Routing",
+      "conditions": {
+        "keywords": ["help", "support", "problem", "issue", "broken"],
+        "caller_type": "existing_customer"
+      },
+      "action": "route_to_support",
+      "priority": "high"
+    },
+    {
+      "id": "rule_002",
+      "name": "Sales Routing",
+      "conditions": {
+        "keywords": ["pricing", "cost", "buy", "purchase", "demo"],
+        "caller_type": "new_customer"
+      },
+      "action": "route_to_sales",
+      "priority": "medium"
+    },
+    {
+      "id": "rule_003",
+      "name": "Technical Routing",
+      "conditions": {
+        "keywords": ["install", "setup", "configure", "error", "bug"],
+        "caller_type": "any"
+      },
+      "action": "route_to_technical",
+      "priority": "high"
+    }
+  ],
+  "settings": {
+    "default_greeting": "Hello! Thank you for calling. How can I help you today?",
+    "default_goodbye": "Thank you for calling. Have a great day!",
+    "call_timeout": 300,
+    "max_call_duration": 1800,
+    "voicemail_enabled": true,
+    "call_recording": true,
+    "transcription_enabled": true
+  }
+} 
