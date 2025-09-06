@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Maker Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #00ff88;
+            --secondary-color: #ff8800;
+            --danger-color: #ff4444;
+            --warning-color: #ffaa00;
+            --dark-bg: #1a1a1a;
+            --darker-bg: #0d0d0d;
+            --card-bg: #2a2a2a;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background-color: var(--darker-bg) !important;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background-color: var(--darker-bg);
+            border-bottom: 1px solid #333;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .metric-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .positive {
+            color: var(--primary-color);
+        }
+        
+        .negative {
+            color: var(--danger-color);
+        }
+        
+        .warning {
+            color: var(--warning-color);
+        }
+        
+        .table {
+            color: var(--text-color);
+        }
+        
+        .table th {
+            border-color: #333;
+            color: var(--primary-color);
+        }
+        
+        .table td {
+            border-color: #333;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .status-running {
+            background-color: var(--primary-color);
+        }
+        
+        .status-warning {
+            background-color: var(--warning-color);
+        }
+        
+        .status-error {
+            background-color: var(--danger-color);
+        }
+        
+        .signal-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .signal-buy {
+            background-color: var(--primary-color);
+            color: #000;
+        }
+        
+        .signal-sell {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+        
+        .signal-hold {
+            background-color: var(--text-muted);
+            color: #fff;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+        }
+        
+        .refresh-btn {
+            background-color: var(--primary-color);
+            border: none;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #00cc6a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot"></i> AI Market Maker
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text">
+                    <span class="status-indicator status-running"></span>
+                    <span id="system-status">Connected</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- System Overview -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body metric-card">
+                        <div class="metric-value positive" id="total-pnl">$25,000</div>
+                        <div class="metric-label">Total PnL</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body metric-card">
+                        <div class="metric-value positive" id="win-rate">65%</div>
+                        <div class="metric-label">Win Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body metric-card">
+                        <div class="metric-value warning" id="active-signals">3</div>
+                        <div class="metric-label">Active Signals</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body metric-card">
+                        <div class="metric-value negative" id="risk-level">Medium</div>
+                        <div class="metric-label">Risk Level</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i> Price Chart
+                        <button class="refresh-btn float-end" onclick="refreshPriceChart()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="price-chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i> Trading Volume
+                        <button class="refresh-btn float-end" onclick="refreshVolumeChart()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="volume-chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk and Performance Charts -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i> Risk Metrics
+                        <button class="refresh-btn float-end" onclick="refreshRiskChart()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="risk-chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-trophy"></i> Performance
+                        <button class="refresh-btn float-end" onclick="refreshPerformanceChart()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="performance-chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tables Row -->
+        <div class="row">
+            <!-- Positions -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i> Active Positions
+                        <button class="refresh-btn float-end" onclick="refreshPositions()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Side</th>
+                                        <th>Size</th>
+                                        <th>PnL</th>
+                                        <th>Leverage</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="positions-table">
+                                    <tr>
+                                        <td colspan="5" class="loading">Loading positions...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trading Signals -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-signal"></i> Trading Signals
+                        <button class="refresh-btn float-end" onclick="refreshSignals()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Signal</th>
+                                        <th>Confidence</th>
+                                        <th>Target</th>
+                                        <th>Timeframe</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="signals-table">
+                                    <tr>
+                                        <td colspan="5" class="loading">Loading signals...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liquidation Signals and Market Maker Activities -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle"></i> Liquidation Signals
+                        <button class="refresh-btn float-end" onclick="refreshLiquidationSignals()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Side</th>
+                                        <th>Probability</th>
+                                        <th>Risk Level</th>
+                                        <th>Est. Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="liquidation-signals-table">
+                                    <tr>
+                                        <td colspan="5" class="loading">Loading liquidation signals...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i> Market Maker Activities
+                        <button class="refresh-btn float-end" onclick="refreshMarketMakerActivities()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>MM ID</th>
+                                        <th>Symbol</th>
+                                        <th>Activity</th>
+                                        <th>Volume</th>
+                                        <th>Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="market-maker-table">
+                                    <tr>
+                                        <td colspan="5" class="loading">Loading market maker activities...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize Socket.IO connection
+        const socket = io();
+        
+        // Connection status
+        socket.on('connect', function() {
+            document.getElementById('system-status').textContent = 'Connected';
+            console.log('Connected to server');
+        });
+        
+        socket.on('disconnect', function() {
+            document.getElementById('system-status').textContent = 'Disconnected';
+            console.log('Disconnected from server');
+        });
+        
+        // Dashboard updates
+        socket.on('dashboard_update', function(data) {
+            updateDashboard(data);
+        });
+        
+        socket.on('positions_update', function(data) {
+            updatePositionsTable(data);
+        });
+        
+        socket.on('liquidation_signals_update', function(data) {
+            updateLiquidationSignalsTable(data);
+        });
+        
+        socket.on('trading_signals_update', function(data) {
+            updateSignalsTable(data);
+        });
+        
+        socket.on('risk_metrics_update', function(data) {
+            updateRiskMetrics(data);
+        });
+        
+        // Error handling
+        socket.on('error', function(data) {
+            console.error('Server error:', data.message);
+        });
+        
+        // Update dashboard with new data
+        function updateDashboard(data) {
+            if (data.performance_metrics) {
+                updatePerformanceMetrics(data.performance_metrics);
+            }
+            if (data.positions) {
+                updatePositionsTable(data.positions);
+            }
+            if (data.trading_signals) {
+                updateSignalsTable(data.trading_signals);
+            }
+            if (data.liquidation_signals) {
+                updateLiquidationSignalsTable(data.liquidation_signals);
+            }
+            if (data.market_maker_activities) {
+                updateMarketMakerTable(data.market_maker_activities);
+            }
+        }
+        
+        // Update performance metrics
+        function updatePerformanceMetrics(metrics) {
+            if (metrics.total_pnl !== undefined) {
+                document.getElementById('total-pnl').textContent = `$${metrics.total_pnl.toLocaleString()}`;
+                document.getElementById('total-pnl').className = metrics.total_pnl >= 0 ? 'metric-value positive' : 'metric-value negative';
+            }
+            if (metrics.win_rate !== undefined) {
+                document.getElementById('win-rate').textContent = `${(metrics.win_rate * 100).toFixed(1)}%`;
+            }
+        }
+        
+        // Update positions table
+        function updatePositionsTable(positions) {
+            const tbody = document.getElementById('positions-table');
+            if (positions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">No active positions</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = positions.map(position => `
+                <tr>
+                    <td>${position.symbol}</td>
+                    <td><span class="signal-badge ${position.side === 'long' ? 'signal-buy' : 'signal-sell'}">${position.side}</span></td>
+                    <td>${position.size}</td>
+                    <td class="${position.unrealized_pnl >= 0 ? 'positive' : 'negative'}">$${position.unrealized_pnl.toLocaleString()}</td>
+                    <td>${position.leverage}x</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update signals table
+        function updateSignalsTable(signals) {
+            const tbody = document.getElementById('signals-table');
+            if (signals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">No active signals</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = signals.map(signal => `
+                <tr>
+                    <td>${signal.symbol}</td>
+                    <td><span class="signal-badge signal-${signal.signal_type}">${signal.signal_type.toUpperCase()}</span></td>
+                    <td>${(signal.confidence * 100).toFixed(1)}%</td>
+                    <td>$${signal.target_price?.toFixed(2) || 'N/A'}</td>
+                    <td>${signal.timeframe}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update liquidation signals table
+        function updateLiquidationSignalsTable(signals) {
+            const tbody = document.getElementById('liquidation-signals-table');
+            if (signals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">No liquidation signals</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = signals.map(signal => `
+                <tr>
+                    <td>${signal.symbol}</td>
+                    <td><span class="signal-badge ${signal.side === 'long' ? 'signal-buy' : 'signal-sell'}">${signal.side}</span></td>
+                    <td>${(signal.probability * 100).toFixed(1)}%</td>
+                    <td><span class="signal-badge ${signal.risk_level === 'high' ? 'signal-sell' : 'signal-hold'}">${signal.risk_level}</span></td>
+                    <td>${new Date(signal.estimated_time).toLocaleTimeString()}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update market maker activities table
+        function updateMarketMakerTable(activities) {
+            const tbody = document.getElementById('market-maker-table');
+            if (activities.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">No market maker activities</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = activities.map(activity => `
+                <tr>
+                    <td>${activity.market_maker_id}</td>
+                    <td>${activity.symbol}</td>
+                    <td>${activity.activity_type}</td>
+                    <td>$${activity.volume.toLocaleString()}</td>
+                    <td>${(activity.price_impact * 100).toFixed(3)}%</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Chart functions
+        function refreshPriceChart() {
+            fetch('/api/charts/price-chart')
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot('price-chart', data.data, data.layout);
+                })
+                .catch(error => console.error('Error loading price chart:', error));
+        }
+        
+        function refreshVolumeChart() {
+            fetch('/api/charts/volume-chart')
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot('volume-chart', data.data, data.layout);
+                })
+                .catch(error => console.error('Error loading volume chart:', error));
+        }
+        
+        function refreshRiskChart() {
+            fetch('/api/charts/risk-chart')
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot('risk-chart', data.data, data.layout);
+                })
+                .catch(error => console.error('Error loading risk chart:', error));
+        }
+        
+        function refreshPerformanceChart() {
+            fetch('/api/charts/performance-chart')
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot('performance-chart', data.data, data.layout);
+                })
+                .catch(error => console.error('Error loading performance chart:', error));
+        }
+        
+        // Refresh functions
+        function refreshPositions() {
+            socket.emit('request_data', {type: 'positions'});
+        }
+        
+        function refreshSignals() {
+            socket.emit('request_data', {type: 'trading_signals'});
+        }
+        
+        function refreshLiquidationSignals() {
+            socket.emit('request_data', {type: 'liquidation_signals'});
+        }
+        
+        function refreshMarketMakerActivities() {
+            socket.emit('request_data', {type: 'market_maker_activities'});
+        }
+        
+        // Initialize charts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshPriceChart();
+            refreshVolumeChart();
+            refreshRiskChart();
+            refreshPerformanceChart();
+            
+            // Request initial data
+            socket.emit('request_data', {type: 'positions'});
+            socket.emit('request_data', {type: 'trading_signals'});
+            socket.emit('request_data', {type: 'liquidation_signals'});
+            socket.emit('request_data', {type: 'market_maker_activities'});
+        });
+    </script>
+</body>
+</html> 

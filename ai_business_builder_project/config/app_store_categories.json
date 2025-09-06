@@ -1,0 +1,308 @@
+{
+  "categories": {
+    "Business": {
+      "description": "Business and productivity applications",
+      "market_size": "Large",
+      "competition_level": "High",
+      "ai_opportunities": [
+        "Automated reporting",
+        "Smart scheduling",
+        "AI-powered analytics",
+        "Intelligent document processing",
+        "Predictive business insights"
+      ],
+      "successful_examples": [
+        "Slack",
+        "Zoom",
+        "Microsoft Teams",
+        "Trello",
+        "Asana"
+      ],
+      "revenue_potential": "High",
+      "development_complexity": "Medium"
+    },
+    "Education": {
+      "description": "Educational and learning applications",
+      "market_size": "Large",
+      "competition_level": "Medium",
+      "ai_opportunities": [
+        "Personalized learning paths",
+        "AI tutors",
+        "Adaptive testing",
+        "Smart content recommendations",
+        "Automated grading"
+      ],
+      "successful_examples": [
+        "Duolingo",
+        "Khan Academy",
+        "Coursera",
+        "Udemy",
+        "Quizlet"
+      ],
+      "revenue_potential": "Medium",
+      "development_complexity": "Medium"
+    },
+    "Entertainment": {
+      "description": "Entertainment and media applications",
+      "market_size": "Very Large",
+      "competition_level": "Very High",
+      "ai_opportunities": [
+        "Content recommendation",
+        "AI-generated content",
+        "Personalized playlists",
+        "Smart content curation",
+        "Predictive user preferences"
+      ],
+      "successful_examples": [
+        "Netflix",
+        "Spotify",
+        "YouTube",
+        "TikTok",
+        "Instagram"
+      ],
+      "revenue_potential": "Very High",
+      "development_complexity": "High"
+    },
+    "Finance": {
+      "description": "Financial and banking applications",
+      "market_size": "Large",
+      "competition_level": "High",
+      "ai_opportunities": [
+        "AI-powered investment advice",
+        "Fraud detection",
+        "Smart budgeting",
+        "Predictive financial planning",
+        "Automated expense categorization"
+      ],
+      "successful_examples": [
+        "Robinhood",
+        "Mint",
+        "Acorns",
+        "PayPal",
+        "Venmo"
+      ],
+      "revenue_potential": "High",
+      "development_complexity": "High"
+    },
+    "Health & Fitness": {
+      "description": "Health, fitness, and wellness applications",
+      "market_size": "Large",
+      "competition_level": "Medium",
+      "ai_opportunities": [
+        "Personalized workout plans",
+        "AI health monitoring",
+        "Smart nutrition advice",
+        "Predictive health insights",
+        "Automated progress tracking"
+      ],
+      "successful_examples": [
+        "MyFitnessPal",
+        "Fitbit",
+        "Strava",
+        "Headspace",
+        "Calm"
+      ],
+      "revenue_potential": "Medium",
+      "development_complexity": "Medium"
+    },
+    "Lifestyle": {
+      "description": "Lifestyle and personal development applications",
+      "market_size": "Medium",
+      "competition_level": "Medium",
+      "ai_opportunities": [
+        "Personalized recommendations",
+        "Smart habit tracking",
+        "AI-powered goal setting",
+        "Predictive lifestyle insights",
+        "Automated routine optimization"
+      ],
+      "successful_examples": [
+        "Habitica",
+        "Forest",
+        "Productive",
+        "Fabulous",
+        "Loop Habit Tracker"
+      ],
+      "revenue_potential": "Medium",
+      "development_complexity": "Low"
+    },
+    "Productivity": {
+      "description": "Productivity and organization applications",
+      "market_size": "Large",
+      "competition_level": "High",
+      "ai_opportunities": [
+        "Smart task prioritization",
+        "AI-powered time management",
+        "Intelligent note-taking",
+        "Automated workflow optimization",
+        "Predictive productivity insights"
+      ],
+      "successful_examples": [
+        "Notion",
+        "Evernote",
+        "Todoist",
+        "Forest",
+        "RescueTime"
+      ],
+      "revenue_potential": "High",
+      "development_complexity": "Medium"
+    },
+    "Photo & Video": {
+      "description": "Photo and video editing applications",
+      "market_size": "Large",
+      "competition_level": "High",
+      "ai_opportunities": [
+        "AI-powered photo editing",
+        "Smart video enhancement",
+        "Automated content creation",
+        "Intelligent filters and effects",
+        "Predictive editing suggestions"
+      ],
+      "successful_examples": [
+        "VSCO",
+        "Snapseed",
+        "Canva",
+        "CapCut",
+        "InShot"
+      ],
+      "revenue_potential": "Medium",
+      "development_complexity": "High"
+    },
+    "Shopping": {
+      "description": "E-commerce and shopping applications",
+      "market_size": "Very Large",
+      "competition_level": "Very High",
+      "ai_opportunities": [
+        "Personalized product recommendations",
+        "AI-powered price optimization",
+        "Smart inventory management",
+        "Predictive demand forecasting",
+        "Automated customer service"
+      ],
+      "successful_examples": [
+        "Amazon",
+        "eBay",
+        "Etsy",
+        "Wish",
+        "Shopify"
+      ],
+      "revenue_potential": "Very High",
+      "development_complexity": "High"
+    },
+    "Social Networking": {
+      "description": "Social media and networking applications",
+      "market_size": "Very Large",
+      "competition_level": "Very High",
+      "ai_opportunities": [
+        "Content recommendation algorithms",
+        "AI-powered matching",
+        "Smart content moderation",
+        "Predictive engagement optimization",
+        "Automated content creation"
+      ],
+      "successful_examples": [
+        "Facebook",
+        "Instagram",
+        "Twitter",
+        "LinkedIn",
+        "TikTok"
+      ],
+      "revenue_potential": "Very High",
+      "development_complexity": "Very High"
+    },
+    "Travel": {
+      "description": "Travel and navigation applications",
+      "market_size": "Large",
+      "competition_level": "High",
+      "ai_opportunities": [
+        "Personalized travel recommendations",
+        "AI-powered trip planning",
+        "Smart itinerary optimization",
+        "Predictive pricing insights",
+        "Automated travel assistance"
+      ],
+      "successful_examples": [
+        "Airbnb",
+        "Booking.com",
+        "TripAdvisor",
+        "Google Maps",
+        "Uber"
+      ],
+      "revenue_potential": "High",
+      "development_complexity": "High"
+    },
+    "Utilities": {
+      "description": "Utility and tool applications",
+      "market_size": "Medium",
+      "competition_level": "Medium",
+      "ai_opportunities": [
+        "Smart automation",
+        "AI-powered optimization",
+        "Predictive maintenance",
+        "Intelligent resource management",
+        "Automated problem solving"
+      ],
+      "successful_examples": [
+        "IFTTT",
+        "Zapier",
+        "Shortcuts",
+        "Tasker",
+        "Automate"
+      ],
+      "revenue_potential": "Medium",
+      "development_complexity": "Medium"
+    }
+  },
+  "analysis_parameters": {
+    "market_size_weights": {
+      "Very Large": 5,
+      "Large": 4,
+      "Medium": 3,
+      "Small": 2,
+      "Very Small": 1
+    },
+    "competition_weights": {
+      "Very High": 1,
+      "High": 2,
+      "Medium": 3,
+      "Low": 4,
+      "Very Low": 5
+    },
+    "revenue_potential_weights": {
+      "Very High": 5,
+      "High": 4,
+      "Medium": 3,
+      "Low": 2,
+      "Very Low": 1
+    },
+    "development_complexity_weights": {
+      "Very High": 1,
+      "High": 2,
+      "Medium": 3,
+      "Low": 4,
+      "Very Low": 5
+    }
+  },
+  "ai_enhancement_opportunities": {
+    "common_features": [
+      "Personalization",
+      "Automation",
+      "Predictive analytics",
+      "Smart recommendations",
+      "Content generation",
+      "Process optimization",
+      "User behavior analysis",
+      "Automated customer service"
+    ],
+    "emerging_trends": [
+      "AI-powered content creation",
+      "Voice and speech recognition",
+      "Computer vision",
+      "Natural language processing",
+      "Machine learning optimization",
+      "Automated decision making",
+      "Intelligent automation",
+      "Predictive maintenance"
+    ]
+  }
+} 

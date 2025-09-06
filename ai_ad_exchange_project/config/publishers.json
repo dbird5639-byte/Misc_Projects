@@ -1,0 +1,88 @@
+{
+  "publishers": [
+    {
+      "id": "pub_001",
+      "name": "GamingStreamer123",
+      "platform": "twitch",
+      "channel_id": "gamingstreamer123",
+      "keywords": ["gaming", "fps", "shooter", "esports"],
+      "followers": 15000,
+      "avg_viewers": 500,
+      "stream_hours_monthly": 120,
+      "status": "active",
+      "approved": true,
+      "payout_info": {
+        "method": "paypal",
+        "email": "gamingstreamer123@example.com"
+      },
+      "ad_preferences": {
+        "max_ads_per_hour": 4,
+        "preferred_categories": ["gaming", "tech", "energy"],
+        "blocked_categories": ["alcohol", "gambling"]
+      },
+      "performance_metrics": {
+        "avg_click_rate": 0.025,
+        "avg_engagement_rate": 0.15,
+        "total_earnings": 1250.50
+      }
+    },
+    {
+      "id": "pub_002",
+      "name": "TechReviewer",
+      "platform": "youtube",
+      "channel_id": "techreviewer",
+      "keywords": ["technology", "reviews", "gadgets", "smartphones"],
+      "followers": 25000,
+      "avg_viewers": 800,
+      "stream_hours_monthly": 80,
+      "status": "active",
+      "approved": true,
+      "payout_info": {
+        "method": "bank_transfer",
+        "account": "1234567890"
+      },
+      "ad_preferences": {
+        "max_ads_per_hour": 3,
+        "preferred_categories": ["tech", "software", "gadgets"],
+        "blocked_categories": ["gambling", "dating"]
+      },
+      "performance_metrics": {
+        "avg_click_rate": 0.035,
+        "avg_engagement_rate": 0.22,
+        "total_earnings": 2100.75
+      }
+    },
+    {
+      "id": "pub_003",
+      "name": "FitnessCoach",
+      "platform": "instagram",
+      "channel_id": "fitnesscoach",
+      "keywords": ["fitness", "health", "workout", "nutrition"],
+      "followers": 8000,
+      "avg_viewers": 300,
+      "stream_hours_monthly": 60,
+      "status": "active",
+      "approved": true,
+      "payout_info": {
+        "method": "paypal",
+        "email": "fitnesscoach@example.com"
+      },
+      "ad_preferences": {
+        "max_ads_per_hour": 2,
+        "preferred_categories": ["fitness", "health", "supplements"],
+        "blocked_categories": ["fast_food", "alcohol"]
+      },
+      "performance_metrics": {
+        "avg_click_rate": 0.018,
+        "avg_engagement_rate": 0.12,
+        "total_earnings": 850.25
+      }
+    }
+  ],
+  "settings": {
+    "auto_approval_threshold": 1000,
+    "min_followers": 100,
+    "min_stream_hours": 10,
+    "commission_rate": 0.15
+  }
+} 

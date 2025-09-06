@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ad Exchange Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .list-item .name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .list-item .value {
+            color: #7f8c8d;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Ad Exchange</h1>
+            <p>Intelligent Advertising Marketplace</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-publishers">3</div>
+                <div class="stat-label">Active Publishers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-advertisers">3</div>
+                <div class="stat-label">Active Advertisers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="active-campaigns">3</div>
+                <div class="stat-label">Active Campaigns</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="today-impressions">1,500</div>
+                <div class="stat-label">Today's Impressions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="today-clicks">45</div>
+                <div class="stat-label">Today's Clicks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="today-revenue">$22.50</div>
+                <div class="stat-label">Today's Revenue</div>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="section">
+                <h3>📊 Top Publishers</h3>
+                <div id="top-publishers">
+                    <div class="list-item">
+                        <span class="name">GamingStreamer123</span>
+                        <span class="value">$1,250.50</span>
+                    </div>
+                    <div class="list-item">
+                        <span class="name">TechReviewer</span>
+                        <span class="value">$2,100.75</span>
+                    </div>
+                    <div class="list-item">
+                        <span class="name">FitnessCoach</span>
+                        <span class="value">$850.25</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>💰 Top Advertisers</h3>
+                <div id="top-advertisers">
+                    <div class="list-item">
+                        <span class="name">GamingTech Inc</span>
+                        <span class="value">$12,500</span>
+                    </div>
+                    <div class="list-item">
+                        <span class="name">FitnessSupplements Co</span>
+                        <span class="value">$8,000</span>
+                    </div>
+                    <div class="list-item">
+                        <span class="name">TechStartup LLC</span>
+                        <span class="value">$3,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="padding: 30px; text-align: center;">
+            <button class="btn" onclick="loadDashboard()">Refresh Dashboard</button>
+        </div>
+    </div>
+    
+    <button class="refresh-btn" onclick="loadDashboard()">🔄</button>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html> 

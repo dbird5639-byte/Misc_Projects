@@ -1,0 +1,154 @@
+{
+  "advertisers": [
+    {
+      "id": "adv_001",
+      "name": "GamingTech Inc",
+      "email": "ads@gamingtech.com",
+      "status": "active",
+      "verified": true,
+      "budget": {
+        "total": 50000.0,
+        "daily_limit": 2000.0,
+        "spent": 12500.0,
+        "remaining": 37500.0
+      },
+      "campaigns": [
+        {
+          "id": "camp_001",
+          "name": "Gaming Headset Launch",
+          "category": "gaming",
+          "keywords": ["gaming", "headset", "audio", "esports"],
+          "target_audience": {
+            "age_range": [16, 35],
+            "interests": ["gaming", "esports", "technology"],
+            "platforms": ["twitch", "youtube"]
+          },
+          "ad_creative": {
+            "image_url": "https://example.com/headset_ad.jpg",
+            "landing_page": "https://gamingtech.com/headset",
+            "title": "Pro Gaming Headset - 50% Off!",
+            "description": "Crystal clear audio for competitive gaming"
+          },
+          "bidding": {
+            "cpc": 0.50,
+            "cpm": 5.00,
+            "budget": 10000.0,
+            "spent": 2500.0
+          },
+          "performance": {
+            "impressions": 50000,
+            "clicks": 1250,
+            "conversions": 125,
+            "ctr": 0.025,
+            "cvr": 0.10
+          },
+          "status": "active",
+          "start_date": "2024-01-01",
+          "end_date": "2024-12-31"
+        }
+      ]
+    },
+    {
+      "id": "adv_002",
+      "name": "FitnessSupplements Co",
+      "email": "marketing@fitnesssupplements.com",
+      "status": "active",
+      "verified": true,
+      "budget": {
+        "total": 30000.0,
+        "daily_limit": 1500.0,
+        "spent": 8000.0,
+        "remaining": 22000.0
+      },
+      "campaigns": [
+        {
+          "id": "camp_002",
+          "name": "Protein Powder Promotion",
+          "category": "fitness",
+          "keywords": ["fitness", "protein", "supplements", "workout"],
+          "target_audience": {
+            "age_range": [18, 45],
+            "interests": ["fitness", "health", "bodybuilding"],
+            "platforms": ["instagram", "youtube"]
+          },
+          "ad_creative": {
+            "image_url": "https://example.com/protein_ad.jpg",
+            "landing_page": "https://fitnesssupplements.com/protein",
+            "title": "Premium Protein Powder - Free Shipping",
+            "description": "Build muscle faster with our premium blend"
+          },
+          "bidding": {
+            "cpc": 0.75,
+            "cpm": 8.00,
+            "budget": 8000.0,
+            "spent": 2000.0
+          },
+          "performance": {
+            "impressions": 30000,
+            "clicks": 900,
+            "conversions": 90,
+            "ctr": 0.030,
+            "cvr": 0.10
+          },
+          "status": "active",
+          "start_date": "2024-01-15",
+          "end_date": "2024-11-30"
+        }
+      ]
+    },
+    {
+      "id": "adv_003",
+      "name": "TechStartup LLC",
+      "email": "growth@techstartup.com",
+      "status": "active",
+      "verified": false,
+      "budget": {
+        "total": 15000.0,
+        "daily_limit": 750.0,
+        "spent": 3000.0,
+        "remaining": 12000.0
+      },
+      "campaigns": [
+        {
+          "id": "camp_003",
+          "name": "App Launch Campaign",
+          "category": "technology",
+          "keywords": ["technology", "app", "software", "innovation"],
+          "target_audience": {
+            "age_range": [20, 40],
+            "interests": ["technology", "software", "innovation"],
+            "platforms": ["youtube", "twitter"]
+          },
+          "ad_creative": {
+            "image_url": "https://example.com/app_ad.jpg",
+            "landing_page": "https://techstartup.com/app",
+            "title": "Revolutionary App - Try Free Today",
+            "description": "Transform your workflow with AI-powered features"
+          },
+          "bidding": {
+            "cpc": 1.00,
+            "cpm": 10.00,
+            "budget": 5000.0,
+            "spent": 1000.0
+          },
+          "performance": {
+            "impressions": 15000,
+            "clicks": 450,
+            "conversions": 45,
+            "ctr": 0.030,
+            "cvr": 0.10
+          },
+          "status": "active",
+          "start_date": "2024-02-01",
+          "end_date": "2024-08-31"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "min_budget": 100.0,
+    "max_budget": 100000.0,
+    "verification_required": true,
+    "auto_approval_threshold": 1000.0
+  }
+} 
